@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Gowthaman and Kaviya</title>
 <meta name="description" content="Wedding invitation of P. Gowthaman and B. Kaviya, 10 December 2026, Salem.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gowthaman &amp; Kaviya – Wedding Invitation">
+<meta property="og:description" content="Join us on 10 December 2026 in Salem to bless us. Wedding at 8:45 AM, reception at 6:00 PM.">
+<meta property="og:image" content="https://pgowthaman.github.io/gowthaman-kaviya-wedding/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://pgowthaman.github.io/gowthaman-kaviya-wedding/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Tamil:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap">
 <style>
 /* Layout: full-screen chapters on one centered column. Hero with turning mandala and petals, couple,
@@ -56,12 +64,14 @@ h1,h2,h3{margin:0;font-weight:300}
 .dateline{font-size:clamp(20px,5.6vw,28px);letter-spacing:.3em;color:var(--fg);font-weight:400;font-variant-numeric:tabular-nums}
 #top .eyebrow{font-size:clamp(14px,3.8vw,18px);letter-spacing:.34em;font-weight:500}
 .ta #top .eyebrow{font-size:clamp(18px,4.8vw,24px);letter-spacing:.04em}
-.cue{position:absolute;bottom:28px;left:50%;translate:-50% 0;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
-.cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--accent),transparent);animation:cue 2.2s ease-in-out infinite;transform-origin:top}
-@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-.ta .cue{letter-spacing:.05em;text-transform:none;font-size:13px}
 
 /* decorative */
+.cue{position:absolute;bottom:max(28px,calc(env(safe-area-inset-bottom,0px) + 20px));left:50%;translate:-50% 0;z-index:2;width:46px;height:46px;border-radius:50%;border:1px solid var(--accent);background:none;color:var(--accent);display:grid;place-items:center;padding:0;cursor:pointer;animation:bob 1.9s ease-in-out infinite;transition:opacity .45s,visibility .45s}
+.cue svg{width:20px;height:20px;display:block}
+.cue:hover{background:var(--accent);color:var(--bg)}
+.cue:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.cue.gone{opacity:0;visibility:hidden;animation:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
 .mandala{position:absolute;left:50%;top:50%;width:min(110vw,720px);aspect-ratio:1;color:var(--accent);opacity:.14;pointer-events:none;
   translate:-50% -50%;rotate:calc(var(--sy) * .04deg)}
 canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -132,6 +142,16 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 .cp h3{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(22px,6vw,32px);line-height:1.2}
 .ta .cp h3{font-family:var(--body);font-style:normal;font-weight:400}
 @media (min-width:600px){.pair2{gap:24px}}
+/* route suggestion under an address */
+.route{display:flex;flex-direction:column;gap:3px;border-left:2px solid var(--accent);padding:2px 0 2px 14px;text-align:left}
+.route .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+.route .v{font-size:17px;line-height:1.5}
+.route .d{font-size:14px;color:var(--muted);line-height:1.5}
+.ta .route .k{font-size:14px;letter-spacing:.03em;text-transform:none}
+/* add to calendar + schedule */
+.txt .row{justify-content:flex-start;margin-top:4px}
+.note{font-size:13px;color:var(--muted);margin-top:-6px}
+.ta .note{font-size:14px}
 .in-w hr,.txt hr{width:48px;height:0;border:0;border-top:1px solid var(--accent);margin:0;flex:none}
 .chip{font-size:13px;letter-spacing:.12em;color:var(--accent);border:1px solid var(--accent);padding:8px 16px;font-variant-numeric:tabular-nums}
 .ta .chip{letter-spacing:.02em;font-size:14px}
@@ -184,9 +204,9 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js [data-r]{opacity:1;transform:none;transition:none}
-  .mandala{rotate:none}.cue i{animation:none}
+  .mandala{rotate:none}.cue{animation:none}
 }
-@media (max-width:420px){.bar nav{gap:14px}.bar nav a{font-size:12px;letter-spacing:.1em}.lang button{font-size:13px;padding:7px 11px}}
+@media (max-width:420px){.bar{gap:8px}.bar nav{gap:12px;min-width:0;overflow-x:auto;scrollbar-width:none}.bar nav::-webkit-scrollbar{display:none}.bar nav a{font-size:11.5px;letter-spacing:.06em;white-space:nowrap}.lang button{font-size:12.5px;padding:7px 9px}}
 </style>
 </head>
 <body>
@@ -195,6 +215,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   <nav aria-label="Sections">
     <a href="#wedding" data-t="Wedding|திருமணம்">Wedding</a>
     <a href="#reception" data-t="Reception|வரவேற்பு">Reception</a>
+    <a href="#contact" data-t="Contact|தொடர்பு">Contact</a>
   </nav>
   <div class="lang" role="group" aria-label="Language">
     <button type="button" id="b-en" aria-pressed="true">English</button>
@@ -218,7 +239,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       </div>
       <div class="dateline" data-r style="--d:.45s">10 · 12 · 2026</div>
     </div>
-    <div class="cue" aria-hidden="true"><i></i></div>
+    <button class="cue" id="cue" type="button" aria-label="Scroll down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   </section>
 
   <!-- 2 message -->
@@ -275,10 +296,15 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       <div class="day" data-r style="--d:.2s" data-t="Thursday · December 2026|வியாழக்கிழமை · டிசம்பர் 2026">Thursday · December 2026</div>
       <hr data-r style="--d:.25s">
       <div class="sub" data-r style="--d:.3s" data-t="Muhurtham · Karthigai 24|முகூர்த்தம் · கார்த்திகை 24">Muhurtham · Karthigai 24</div>
-      <div class="bigtime" data-r style="--d:.35s" data-t="8:30 AM|காலை 8:30">8:30 AM</div>
+      <div class="bigtime" data-r style="--d:.35s" data-t="8:45 AM|காலை 8:45">8:45 AM</div>
       <div class="chip" data-r style="--d:.4s" data-t="Auspicious time 7:30 – 9:00 AM|நல்ல நேரம்: காலை 7:30 – 9:00">Auspicious time 7:30 – 9:00 AM</div>
       <div class="place" data-r style="--d:.45s" data-t="Sri Thanthonreeswarar Temple<br>Belur, Salem District<br>Tamil Nadu|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேளூர், சேலம் மாவட்டம்<br>தமிழ்நாடு">Sri Thanthonreeswarar Temple<br>Belur, Salem District<br>Tamil Nadu</div>
       <a class="btn" data-r style="--d:.5s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Belur+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
+      <div class="row cal" data-r style="--d:.55s">
+        <a class="btn solid" href="calendar/wedding.ics" data-t="Add to calendar|நாட்காட்டியில் சேர்">Add to calendar</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Wedding%20of%20Gowthaman%20and%20Kaviya&amp;dates=20261210T020000Z/20261210T033000Z&amp;details=Muhurtham%20at%208%3A45%20AM%20(auspicious%20time%207%3A30%20AM%20to%209%3A00%20AM).%20Invitation%3A%20https%3A%2F%2Fpgowthaman.github.io%2Fgowthaman-kaviya-wedding%2F&amp;location=Sri%20Thanthonreeswarar%20Temple%2C%20Belur%2C%20Salem%20District%2C%20Tamil%20Nadu" target="_blank" rel="noopener" data-t="Google Calendar|Google Calendar">Google Calendar</a>
+      </div>
+      <div class="note" data-r style="--d:.55s" data-t="Adds a reminder 24 hours before|நினைவூட்டல்: 24 மணி நேரத்திற்கு முன்">Adds a reminder 24 hours before</div>
     </div>
   </section>
 
@@ -291,18 +317,28 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       <div class="day" data-r style="--d:.15s" data-t="Thursday, 10 December 2026|வியாழக்கிழமை, 10 டிசம்பர் 2026">Thursday, 10 December 2026</div>
       <hr data-r style="--d:.2s">
       <div class="sub" data-r style="--d:.25s" data-t="You have always been a part of our lives. Join us that evening and bless us at our wedding reception.|தாங்கள் எப்போதும் எங்கள் வாழ்வின் ஓர் அங்கம். அன்று மாலை நடைபெறும் எங்கள் திருமண வரவேற்பில் கலந்துகொண்டு வாழ்த்த அன்புடன் அழைக்கிறோம்.">You have always been a part of our lives. Join us that evening and bless us at our wedding reception.</div>
-      <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், ஹரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</div>
+      <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், அரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</div>
+      <div class="route" data-r style="--d:.33s">
+        <span class="k" data-t="Suggested route|பரிந்துரைக்கப்படும் வழி">Suggested route</span>
+        <span class="v" data-t="Via Ayodhyapattinam Rama Kovil, Harur Main Road|அயோத்தியாப்பட்டணம் ராமர் கோவில் வழியாக, அரூர் மெயின் ரோடு">Via Ayodhyapattinam Rama Kovil, Harur Main Road</span>
+        <span class="d" data-t="Only 3 km from the Rama Kovil|ராமர் கோவிலிலிருந்து 3 கி.மீ தூரம்">Only 3 km from the Rama Kovil</span>
+      </div>
       <a class="btn" data-r style="--d:.35s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Vaitheeswara+Mahal+Valasaiyur+Harur+Main+Road+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
+      <div class="row cal" data-r style="--d:.4s">
+        <a class="btn solid" href="calendar/reception.ics" data-t="Add to calendar|நாட்காட்டியில் சேர்">Add to calendar</a>
+        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Wedding%20Reception%20of%20Gowthaman%20and%20Kaviya&amp;dates=20261210T123000Z/20261210T153000Z&amp;details=Reception%20from%206%3A00%20PM%20to%209%3A00%20PM.%20Invitation%3A%20https%3A%2F%2Fpgowthaman.github.io%2Fgowthaman-kaviya-wedding%2F&amp;location=Sri%20Vaitheeswara%20Mahal%2C%20Valasaiyur%2C%20Harur%20Main%20Road%2C%20Salem%20District%2C%20Tamil%20Nadu" target="_blank" rel="noopener" data-t="Google Calendar|Google Calendar">Google Calendar</a>
+      </div>
+      <div class="note" data-r style="--d:.4s" data-t="Adds a reminder 24 hours before|நினைவூட்டல்: 24 மணி நேரத்திற்கு முன்">Adds a reminder 24 hours before</div>
     </div>
   </section>
 
   <!-- 8 contact -->
-  <section class="ch over" style="background:var(--bg)">
+  <section class="ch over" id="contact" style="background:var(--bg)">
     <div class="in-w">
       <div class="small" data-r data-t="Contact us|தொடர்புக்கு">Contact us</div>
       <p class="msg" data-r style="--d:.1s" data-t="Need any help or directions? Reach out to us.|உதவி அல்லது வழி தேவையா? எங்களைத் தொடர்புகொள்ளுங்கள்.">Need any help or directions? Reach out to us.</p>
       <div class="contacts" data-r style="--d:.2s">
-        <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b></div>
+        <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b><b><a href="tel:+919790410176">97904 10176</a></b></div>
         <div><span data-t="Bride's family|மணமகள் இல்லம்">Bride's family</span><b><a href="tel:+919944395734">99443 95734</a></b></div>
       </div>
       <div class="thanks" data-r style="--d:.3s" data-t="See you there|சந்திப்போம்">See you there</div>
@@ -385,7 +421,8 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   });
 
   /* scroll: progress, parallax variable, active nav */
-  var prog=document.getElementById('prog'),ticking=false;
+  var prog=document.getElementById('prog'),ticking=false,cue=document.getElementById('cue');
+  cue.addEventListener('click',function(){var n=document.querySelectorAll('main > section')[1];if(n)window.scrollTo({top:n.offsetTop-20,behavior:reduce?'auto':'smooth'})});
   function onScroll(){
     if(ticking)return;ticking=true;
     requestAnimationFrame(function(){
@@ -411,6 +448,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
             :'scale('+(1.05+.12*pp).toFixed(3)+') translateY('+((.5-pp)*-5).toFixed(2)+'%)';
         }
       }
+      cue.classList.toggle('gone',y>30);
       var w=document.getElementById('wedding');
       if(w&&y<w.offsetTop-window.innerHeight*.45){document.querySelectorAll('.bar nav a').forEach(function(a){a.classList.remove('on')})}
       ticking=false;
@@ -425,11 +463,11 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
         if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}
       });
     },{rootMargin:'-45% 0px -45% 0px'});
-    ['wedding','reception','venue'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
+    ['wedding','reception','contact'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
   }
 
-  /* countdown to the ceremony: 10 Dec 2026, 8:30 AM IST */
-  var target=new Date('2026-12-10T08:30:00+05:30').getTime();
+  /* countdown to the ceremony: 10 Dec 2026, 8:45 AM IST */
+  var target=new Date('2026-12-10T08:45:00+05:30').getTime();
   var el={d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
   function p(n){return n<10?'0'+n:''+n}
   function tick(){

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Gowthaman and Kaviya Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:wedding-20261210@gowthaman-kaviya-wedding
+DTSTAMP:20261116T000000Z
+DTSTART:20261210T020000Z
+DTEND:20261210T033000Z
+SUMMARY:Wedding of Gowthaman and Kaviya
+LOCATION:Sri Thanthonreeswarar Temple\, Belur\, Salem District\, Tamil Nadu
+DESCRIPTION:Muhurtham at 8:45 AM (auspicious time 7:30 AM to 9:00 AM). Invitation: https://pgowthaman.github.io/gowthaman-kaviya-wedding/
+URL:https://pgowthaman.github.io/gowthaman-kaviya-wedding/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Gowthaman and Kaviya is in 24 hours
+TRIGGER:-PT24H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
