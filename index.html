@@ -151,6 +151,8 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 /* add to calendar + schedule */
 .txt .row{justify-content:flex-start;margin-top:4px}
 .note{font-size:13px;color:var(--muted);margin-top:-6px}
+.txt .lead{margin:0;font-size:18px;line-height:1.6;color:var(--muted);max-width:36ch}
+.ta .txt .lead{line-height:1.8}
 .ta .note{font-size:14px}
 .in-w hr,.txt hr{width:48px;height:0;border:0;border-top:1px solid var(--accent);margin:0;flex:none}
 .chip{font-size:13px;letter-spacing:.12em;color:var(--accent);border:1px solid var(--accent);padding:8px 16px;font-variant-numeric:tabular-nums}
@@ -247,8 +249,8 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     <div class="in-w">
       <div class="small" data-r data-t="With love|அன்புடன்">With love</div>
       <p class="msg">
-        <span data-r data-t="You have always been an integral part of our lives.|தாங்கள் எப்போதும் எங்கள் வாழ்வின் ஓர் அங்கம்.">You have always been an integral part of our lives.</span>
-        <span class="soft" data-r style="--d:.2s" data-t="We cordially invite you and your family to join us and bless us on the joyous occasion of our wedding.|எங்கள் திருமண விழாவில் தாங்கள் குடும்பத்துடன் வருகை தந்து, எங்களை வாழ்த்த அன்புடன் அழைக்கிறோம்.">We cordially invite you and your family to join us and bless us on the joyous occasion of our wedding.</span>
+        <span data-r data-t="You’ve been part of our story all along,|எங்கள் வாழ்வின் ஒவ்வொரு தருணத்திலும் நீங்களும் இருந்தீர்கள்.">You’ve been part of our story all along,</span>
+        <span class="soft" data-r style="--d:.2s" data-t="and we’d love to have you there for one of the biggest days of it. Come celebrate with us!|இந்த இனிய நாளிலும் எங்களுடன் இருந்து வாழ்த்துங்கள்!">and we’d love to have you there for one of the biggest days of it. Come celebrate with us!</span>
       </p>
     </div>
   </section>
@@ -292,6 +294,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     <figure class="pic"><img src="images/temple.webp" style="--pos:48% 42%" alt="The gopuram and entrance of Sri Thanthondreeswarar Temple, Belur"><figcaption data-t="Sri Thanthondreeswarar Temple|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்">Sri Thanthondreeswarar Temple</figcaption></figure>
     <div class="txt">
       <div class="small" data-r data-t="The wedding|திருமணம்">The wedding</div>
+      <p class="lead" data-r style="--d:.05s" data-t="Come bless us as we tie the knot! The muhurtham is at 8:45 AM, so try to get there a little early.|எங்கள் திருமணத்தில் கலந்துகொண்டு வாழ்த்த வாருங்கள்! முகூர்த்தம் காலை 8:45 மணிக்கு, சற்று முன்னதாகவே வாருங்கள்.">Come bless us as we tie the knot! The muhurtham is at 8:45 AM, so try to get there a little early.</p>
       <div class="big" data-r style="--d:.1s">10</div>
       <div class="day" data-r style="--d:.2s" data-t="Thursday · December 2026|வியாழக்கிழமை · டிசம்பர் 2026">Thursday · December 2026</div>
       <hr data-r style="--d:.25s">
@@ -316,7 +319,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       <div class="bigtime" data-r style="--d:.1s" data-t="6:00 – 9:00 PM|மாலை 6:00 – 9:00">6:00 – 9:00 PM</div>
       <div class="day" data-r style="--d:.15s" data-t="Thursday, 10 December 2026|வியாழக்கிழமை, 10 டிசம்பர் 2026">Thursday, 10 December 2026</div>
       <hr data-r style="--d:.2s">
-      <div class="sub" data-r style="--d:.25s" data-t="You have always been a part of our lives. Join us that evening and bless us at our wedding reception.|தாங்கள் எப்போதும் எங்கள் வாழ்வின் ஓர் அங்கம். அன்று மாலை நடைபெறும் எங்கள் திருமண வரவேற்பில் கலந்துகொண்டு வாழ்த்த அன்புடன் அழைக்கிறோம்.">You have always been a part of our lives. Join us that evening and bless us at our wedding reception.</div>
+      <div class="sub" data-r style="--d:.25s" data-t="Then let’s celebrate! Join us in the evening. Your wishes mean the world to us.|மாலையில் வரவேற்பிலும் சந்திப்போம்! உங்கள் வாழ்த்துகள் எங்களுக்கு மிகவும் முக்கியம்.">Then let’s celebrate! Join us in the evening. Your wishes mean the world to us.</div>
       <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், அரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</div>
       <div class="route" data-r style="--d:.33s">
         <span class="k" data-t="Suggested route|பரிந்துரைக்கப்படும் வழி">Suggested route</span>
@@ -336,7 +339,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   <section class="ch over" id="contact" style="background:var(--bg)">
     <div class="in-w">
       <div class="small" data-r data-t="Contact us|தொடர்புக்கு">Contact us</div>
-      <p class="msg" data-r style="--d:.1s" data-t="Need any help or directions? Reach out to us.|உதவி அல்லது வழி தேவையா? எங்களைத் தொடர்புகொள்ளுங்கள்.">Need any help or directions? Reach out to us.</p>
+      <p class="msg" data-r style="--d:.1s" data-t="Can’t find the place, or need any help? Just give us a call!|வழி தெரியவில்லையா? ஏதேனும் உதவி வேண்டுமா? தயங்காமல் அழையுங்கள்!">Can’t find the place, or need any help? Just give us a call!</p>
       <div class="contacts" data-r style="--d:.2s">
         <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b><b><a href="tel:+919790410176">97904 10176</a></b></div>
         <div><span data-t="Bride's family|மணமகள் இல்லம்">Bride's family</span><b><a href="tel:+919944395734">99443 95734</a></b></div>
