@@ -1,0 +1,415 @@
+<title>Gowthaman and Kaviya</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Tamil:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap">
+<style>
+/* Layout: full-screen chapters on one centered column. Hero with turning mandala and petals, couple,
+   wedding, pinned countdown, an evening-toned reception that slides over it, venues, RSVP, families. */
+:root{
+  --bg:#faf8f7; --fg:#2a1d1d; --muted:#7a6a69; --accent:#7a1f26; --rule:#e4dad8; --panel:#f3eceb;
+  --night:#2b0d12; --night-fg:#f5e9e7; --night-muted:#c6a9a8; --night-accent:#eaa3a8;
+  --display:'Fraunces','Noto Sans Tamil',Georgia,serif; --body:'Jost','Noto Sans Tamil',system-ui,sans-serif;
+  --sy:0;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171112;--fg:#f1e7e5;--muted:#a69493;--accent:#e0868c;--rule:#33282a;--panel:#211819;--night:#2b0d12;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171112;--fg:#f1e7e5;--muted:#a69493;--accent:#e0868c;--rule:#33282a;--panel:#211819;--night:#2b0d12;color-scheme:dark}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:300;overflow-x:clip}
+*{box-sizing:border-box}
+
+/* top bar */
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.bar nav{display:flex;gap:18px}
+.bar nav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.bar nav a.on{color:var(--accent);border-color:var(--accent)}
+.bar nav a:focus-visible,.lang button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.progress{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+.lang{display:flex;border:1px solid var(--rule);flex:none}
+.lang button{font:inherit;font-size:12px;letter-spacing:.06em;padding:6px 12px;border:0;background:none;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+
+/* chapters */
+.ch{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px;
+  padding-block:104px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow:hidden}
+.in-w{position:relative;z-index:1;max-width:540px;width:100%;display:flex;flex-direction:column;align-items:center;gap:28px;min-width:0}
+.pin{position:sticky;top:0;z-index:1}
+.over{z-index:2}
+.night{background:var(--night);color:var(--night-fg);--muted:var(--night-muted);--accent:var(--night-accent);--rule:#4a2a2e}
+
+.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);font-weight:400}
+.mark{font-family:'Noto Sans Tamil',sans-serif;font-size:22px;color:var(--accent);font-weight:400}
+.ta .eyebrow,.ta .quals,.ta .btn,.ta .count span,.ta .small,.ta .role{letter-spacing:.03em;text-transform:none}
+.ta .eyebrow{font-size:16px}
+h1,h2,h3{margin:0;font-weight:300}
+.names{display:flex;flex-direction:column;align-items:center;gap:2px}
+.names h1{font-family:var(--display);font-style:italic;font-size:clamp(50px,15vw,96px);line-height:1.08;letter-spacing:-.015em}
+.ta .names h1{font-style:normal;font-weight:400;font-size:clamp(40px,12vw,76px)}
+.amp{font-family:var(--display);font-style:italic;color:var(--accent);font-size:clamp(26px,7vw,40px);line-height:1}
+.dateline{font-size:14px;letter-spacing:.34em;color:var(--muted);font-variant-numeric:tabular-nums}
+.cue{position:absolute;bottom:28px;left:50%;translate:-50% 0;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--accent),transparent);animation:cue 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.ta .cue{letter-spacing:.05em;text-transform:none;font-size:13px}
+
+/* decorative */
+.mandala{position:absolute;left:50%;top:50%;width:min(110vw,720px);aspect-ratio:1;color:var(--accent);opacity:.14;pointer-events:none;
+  translate:-50% -50%;rotate:calc(var(--sy) * .04deg)}
+.night .mandala{opacity:.12;rotate:calc(var(--sy) * -.03deg)}
+canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+.msg{font-family:var(--display);font-size:clamp(24px,6.4vw,34px);line-height:1.5;font-weight:300}
+.ta .msg{font-family:var(--body);line-height:1.7;font-size:clamp(20px,5.6vw,28px)}
+.msg span{display:block}
+.msg .soft{color:var(--muted)}
+.small{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:400}
+
+/* couple */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+.person{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px 12px;background:var(--panel);min-width:0}
+.mono{width:84px;height:84px;border-radius:50%;border:1px solid var(--accent);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:38px;color:var(--accent)}
+.ta .mono{font-style:normal;font-family:var(--body)}
+.person h3{font-family:var(--display);font-style:italic;font-size:22px}
+.ta .person h3{font-style:normal;font-family:var(--body);font-weight:400;font-size:20px}
+.quals{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.role{font-size:14px;line-height:1.6;color:var(--muted)}
+
+/* event */
+.big{font-family:var(--display);font-weight:300;font-size:clamp(130px,42vw,230px);line-height:.85;letter-spacing:-.04em;color:var(--accent)}
+.bigtime{font-family:var(--display);font-weight:300;font-size:clamp(46px,13vw,76px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ta .bigtime{font-family:var(--body);font-weight:300;font-size:clamp(36px,10vw,58px)}
+.day{font-size:20px;font-weight:400;letter-spacing:.04em;line-height:1.6}
+.sub{font-size:15px;color:var(--muted);line-height:1.7}
+.place{font-size:20px;line-height:1.5}
+
+/* countdown */
+.count{display:grid;grid-template-columns:repeat(4,1fr);width:100%;border-block:1px solid var(--rule)}
+.count div{padding:30px 2px;display:flex;flex-direction:column;gap:10px}
+.count div+div{border-left:1px solid var(--rule)}
+.count b{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(38px,12vw,72px);font-variant-numeric:tabular-nums;line-height:1}
+.count span{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.ta .count span{font-size:13px}
+
+/* venues & buttons */
+.venues{display:grid;gap:16px;width:100%}
+.vcard{background:var(--panel);padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.vcard h3{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:400}
+.ta .vcard h3{letter-spacing:.03em;text-transform:none;font-size:15px}
+.vcard p{margin:0;font-size:16px;line-height:1.7}
+.vcard p small{display:block;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.btn{font:inherit;display:inline-block;padding:11px 20px;border:1px solid var(--accent);background:none;color:var(--accent);text-decoration:none;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--accent);color:var(--bg)}
+.btn.solid{background:var(--accent);color:var(--bg)}
+.btn.solid:hover{opacity:.88}
+.ta .btn{font-size:14px}
+
+/* contacts & families */
+.contacts{display:grid;grid-template-columns:1fr 1fr;width:100%;font-size:14px;line-height:1.8}
+.contacts div{padding:0 10px;min-width:0}
+.contacts div+div{border-left:1px solid var(--rule)}
+.contacts b{display:block;font-weight:400;font-size:17px;letter-spacing:.04em;font-variant-numeric:tabular-nums;margin-top:4px;user-select:all}
+.contacts b a{color:inherit;text-decoration:none}
+.fam{display:grid;grid-template-columns:1fr 1fr;width:100%;background:var(--panel);padding:24px 6px;font-size:14px;line-height:1.8}
+.fam div{padding:0 10px;min-width:0}
+.fam div+div{border-left:1px solid var(--rule)}
+.fam small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ta .fam small{font-size:13px;letter-spacing:.03em;text-transform:none}
+.foot{font-size:14px;color:var(--muted);line-height:1.9}
+.foot em{font-family:var(--display);font-size:18px;color:var(--fg)}
+.ta .foot em{font-family:var(--body);font-style:normal}
+.thanks{font-family:var(--display);font-style:italic;font-size:clamp(34px,10vw,54px);color:var(--accent);line-height:1.1}
+.ta .thanks{font-style:normal;font-family:var(--body);font-weight:400}
+
+/* reveal */
+.js [data-r]{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js [data-r].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js [data-r]{opacity:1;transform:none;transition:none}
+  .mandala{rotate:none}.cue i{animation:none}
+}
+@media (max-width:420px){.bar nav{gap:12px}.bar nav a{font-size:10px;letter-spacing:.12em}.lang button{padding:6px 9px}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="pt" d="M0 0C11 -28 11 -62 0 -92C-11 -62 -11 -28 0 0Z"/>
+    <g id="mandala" fill="none" stroke="currentColor" stroke-width=".5">
+      <circle r="96"/><circle r="99"/><circle r="30"/><circle r="18"/>
+      <use href="#pt"/><use href="#pt" transform="rotate(22.5)"/><use href="#pt" transform="rotate(45)"/><use href="#pt" transform="rotate(67.5)"/>
+      <use href="#pt" transform="rotate(90)"/><use href="#pt" transform="rotate(112.5)"/><use href="#pt" transform="rotate(135)"/><use href="#pt" transform="rotate(157.5)"/>
+      <use href="#pt" transform="rotate(180)"/><use href="#pt" transform="rotate(202.5)"/><use href="#pt" transform="rotate(225)"/><use href="#pt" transform="rotate(247.5)"/>
+      <use href="#pt" transform="rotate(270)"/><use href="#pt" transform="rotate(292.5)"/><use href="#pt" transform="rotate(315)"/><use href="#pt" transform="rotate(337.5)"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="bar" id="bar">
+  <nav aria-label="Sections">
+    <a href="#wedding" data-t="Wedding|திருமணம்">Wedding</a>
+    <a href="#reception" data-t="Reception|வரவேற்பு">Reception</a>
+    <a href="#venue" data-t="Venue|இடம்">Venue</a>
+  </nav>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" id="b-en" aria-pressed="true">English</button>
+    <button type="button" id="b-ta" aria-pressed="false">தமிழ்</button>
+  </div>
+  <div class="progress" id="prog"></div>
+</div>
+
+<main id="root">
+
+  <!-- 1 opening -->
+  <section class="ch" id="top">
+    <svg class="mandala" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#mandala"/></svg>
+    <canvas class="petals" id="petals" aria-hidden="true"></canvas>
+    <div class="in-w">
+      <div class="mark" data-r>உ</div>
+      <div class="eyebrow" data-r style="--d:.1s" data-t="Wedding Invitation|திருமண அழைப்பிதழ்">Wedding Invitation</div>
+      <div class="names" data-r style="--d:.25s">
+        <h1 data-t="P. Gowthaman|ப. கௌதமன்">P. Gowthaman</h1>
+        <div class="amp">&amp;</div>
+        <h1 data-t="B. Kaviya|பா. காவியா">B. Kaviya</h1>
+      </div>
+      <div class="dateline" data-r style="--d:.45s">10 · 12 · 2026</div>
+    </div>
+    <div class="cue"><span data-t="Scroll|கீழே செல்லவும்">Scroll</span><i></i></div>
+  </section>
+
+  <!-- 2 message -->
+  <section class="ch">
+    <div class="in-w">
+      <div class="small" data-r data-t="With love|அன்புடன்">With love</div>
+      <p class="msg">
+        <span data-r data-t="You have always been an integral part of our lives.|தாங்கள் எப்போதும் எங்கள் வாழ்வின் ஓர் அங்கம்.">You have always been an integral part of our lives.</span>
+        <span class="soft" data-r style="--d:.2s" data-t="We cordially invite you and your family to join us and bless us on the joyous occasion of our wedding.|எங்கள் திருமண விழாவில் தாங்கள் குடும்பத்துடன் வருகை தந்து, எங்களை வாழ்த்த அன்புடன் அழைக்கிறோம்.">We cordially invite you and your family to join us and bless us on the joyous occasion of our wedding.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 3 couple -->
+  <section class="ch">
+    <div class="in-w">
+      <div class="small" data-r data-t="The couple|மணமக்கள்">The couple</div>
+      <div class="pair">
+        <div class="person" data-r>
+          <div class="mono" data-t="G|கௌ">G</div>
+          <h3 data-t="P. Gowthaman|ப. கௌதமன்">P. Gowthaman</h3>
+          <div class="quals">B.E. (Mech.)</div>
+        </div>
+        <div class="person" data-r style="--d:.15s">
+          <div class="mono" data-t="K|கா">K</div>
+          <h3 data-t="B. Kaviya|பா. காவியா">B. Kaviya</h3>
+          <div class="quals">B.Sc. (Cardiac Tech.)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 wedding -->
+  <section class="ch" id="wedding">
+    <div class="in-w">
+      <div class="small" data-r data-t="The wedding|திருமணம்">The wedding</div>
+      <div class="big" data-r style="--d:.1s">10</div>
+      <div class="day" data-r style="--d:.2s" data-t="Thursday · December 2026|வியாழக்கிழமை · டிசம்பர் 2026">Thursday · December 2026</div>
+      <div class="bigtime" data-r style="--d:.25s" data-t="7:30 – 9:00 AM|காலை 7:30 – 9:00">7:30 – 9:00 AM</div>
+      <div class="sub" data-r data-t="Muhurtham, Karthigai 24|முகூர்த்தம், கார்த்திகை 24">Muhurtham, Karthigai 24</div>
+      <div class="place" data-r data-t="Sri Thanthonreeswarar Temple<br>Penur, Salem District|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேனூர், சேலம் மாவட்டம்">Sri Thanthonreeswarar Temple<br>Penur, Salem District</div>
+    </div>
+  </section>
+
+  <!-- 5 countdown, stays pinned while the reception slides over it -->
+  <section class="ch pin" aria-label="Countdown to the wedding ceremony">
+    <div class="in-w">
+      <div class="small" data-r data-t="Until we say I do|திருமணத்திற்கு இன்னும்">Until we say I do</div>
+      <div class="count" data-r style="--d:.1s">
+        <div><b id="d">--</b><span data-t="Days|நாட்கள்">Days</span></div>
+        <div><b id="h">--</b><span data-t="Hours|மணி">Hours</span></div>
+        <div><b id="m">--</b><span data-t="Mins|நிமிடம்">Mins</span></div>
+        <div><b id="s">--</b><span data-t="Secs|விநாடி">Secs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 reception, evening palette -->
+  <section class="ch over night" id="reception">
+    <svg class="mandala" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#mandala"/></svg>
+    <div class="in-w">
+      <div class="small" data-r data-t="The reception|வரவேற்பு">The reception</div>
+      <div class="day" data-r data-t="Thursday, 10 December 2026|வியாழக்கிழமை, 10 டிசம்பர் 2026">Thursday, 10 December 2026</div>
+      <div class="bigtime" data-r style="--d:.1s" data-t="6:00 – 9:00 PM|மாலை 6:00 – 9:00">6:00 – 9:00 PM</div>
+      <div class="sub" data-r style="--d:.2s" data-t="Join us that evening and bless us at our wedding reception.|அன்று மாலை நடைபெறும் எங்கள் திருமண வரவேற்பில் கலந்துகொண்டு வாழ்த்த அன்புடன் அழைக்கிறோம்.">Join us that evening and bless us at our wedding reception.</div>
+      <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road, Salem|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், ஹரூர் மெயின் ரோடு, சேலம்">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road, Salem</div>
+    </div>
+  </section>
+
+  <!-- 7 venues -->
+  <section class="ch over" id="venue" style="background:var(--bg)">
+    <div class="in-w">
+      <div class="small" data-r data-t="Find us|இடங்கள்">Find us</div>
+      <div class="venues">
+        <div class="vcard" data-r>
+          <h3 data-t="Wedding · 7:30 AM|திருமணம் · காலை 7:30">Wedding · 7:30 AM</h3>
+          <p data-t="Sri Thanthonreeswarar Temple<small>Penur, Salem District, Tamil Nadu</small>|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<small>பேனூர், சேலம் மாவட்டம், தமிழ்நாடு</small>">Sri Thanthonreeswarar Temple<small>Penur, Salem District, Tamil Nadu</small></p>
+          <div class="row">
+            <a class="btn solid" data-t="Open map|வரைபடம்" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Penur+Salem" target="_blank" rel="noopener">Open map</a>
+            <button class="btn" type="button" data-copy="Sri Thanthonreeswarar Temple, Penur, Salem District, Tamil Nadu" data-t="Copy address|முகவரி நகலெடு">Copy address</button>
+          </div>
+        </div>
+        <div class="vcard" data-r style="--d:.12s">
+          <h3 data-t="Reception · 6:00 PM|வரவேற்பு · மாலை 6:00">Reception · 6:00 PM</h3>
+          <p data-t="Sri Vaitheeswara Mahal<small>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</small>|ஸ்ரீ வைத்தீஸ்வரா மஹால்<small>வலசையூர், ஹரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு</small>">Sri Vaitheeswara Mahal<small>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</small></p>
+          <div class="row">
+            <a class="btn solid" data-t="Open map|வரைபடம்" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Vaitheeswara+Mahal+Valasaiyur+Harur+Main+Road+Salem" target="_blank" rel="noopener">Open map</a>
+            <button class="btn" type="button" data-copy="Sri Vaitheeswara Mahal, Valasaiyur, Harur Main Road, Salem District, Tamil Nadu" data-t="Copy address|முகவரி நகலெடு">Copy address</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 rsvp -->
+  <section class="ch over" style="background:var(--bg)">
+    <div class="in-w">
+      <div class="small" data-r data-t="Will you join us?|வருகையை உறுதிசெய்க">Will you join us?</div>
+      <p class="msg" data-r style="--d:.1s" data-t="Let us know you are coming.|தாங்கள் வருகை தருவதை எங்களுக்குத் தெரிவியுங்கள்.">Let us know you are coming.</p>
+      <div class="row" data-r style="--d:.2s">
+        <a class="btn solid" id="rsvp" target="_blank" rel="noopener" href="https://wa.me/919865068055" data-t="Confirm on WhatsApp|WhatsApp-இல் உறுதிசெய்க">Confirm on WhatsApp</a>
+      </div>
+      <div class="contacts" data-r style="--d:.3s">
+        <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b></div>
+        <div><span data-t="Bride's family|மணமகள் இல்லம்">Bride's family</span><b><a href="tel:+919944395734">99443 95734</a></b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 families and closing -->
+  <section class="ch over" style="background:var(--bg)">
+    <div class="in-w">
+      <div class="fam" data-r>
+        <div><small data-t="Groom's family|மணமகன் இல்லத்தார்">Groom's family</small><span data-t="P. Palanisamy &amp; P. Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem|ப. பழனிசாமி – கோடீஸ்வரி<br>கந்தப்பா காலனி, அன்னதானப்பட்டி, சேலம்">P. Palanisamy &amp; P. Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem</span></div>
+        <div><small data-t="Bride's family|மணமகள் இல்லத்தார்">Bride's family</small><span data-t="B. Bharathidasan &amp; B. Anitha<br>Vellalapatti, Salem|பா. பாரதிதாசன் – அனிதா<br>வெள்ளாளப்பட்டி, சேலம்">B. Bharathidasan &amp; B. Anitha<br>Vellalapatti, Salem</span></div>
+      </div>
+      <div class="thanks" data-r style="--d:.1s" data-t="See you there|சந்திப்போம்">See you there</div>
+      <p class="foot" data-r style="--d:.2s" data-t="With best compliments from<br><em>Friends and Relatives</em>|நண்பர்கள் மற்றும் உறவினர்களின் வாழ்த்துகளுடன்<br><em>இரு வீட்டார் அழைப்பு</em>">With best compliments from<br><em>Friends and Relatives</em></p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var doc=document.documentElement, root=document.getElementById('root');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  doc.classList.add('js');
+
+  /* language */
+  var nodes=document.querySelectorAll('[data-t]'),
+      bEn=document.getElementById('b-en'), bTa=document.getElementById('b-ta'),
+      rsvp=document.getElementById('rsvp'), lang='en';
+  var wa={
+    en:'Hello! We are happy to confirm our presence at Gowthaman & Kaviya’s wedding on 10 December 2026.',
+    ta:'வணக்கம்! 10 டிசம்பர் 2026 அன்று நடைபெறும் கௌதமன் & காவியா திருமணத்தில் கலந்துகொள்கிறோம்.'
+  };
+  function tr(s,i){return s.split('|')[i]}
+  function setLang(l){
+    lang=l; var i=l==='ta'?1:0;
+    for(var k=0;k<nodes.length;k++){nodes[k].innerHTML=tr(nodes[k].getAttribute('data-t'),i);}
+    root.classList.toggle('ta',i===1);
+    document.getElementById('bar').classList.toggle('ta',i===1);
+    doc.lang=i?'ta':'en';
+    bEn.setAttribute('aria-pressed',String(!i)); bTa.setAttribute('aria-pressed',String(!!i));
+    rsvp.href='https://wa.me/919865068055?text='+encodeURIComponent(wa[l]);
+    try{localStorage.setItem('invite-lang',l)}catch(e){}
+  }
+  bEn.onclick=function(){setLang('en')}; bTa.onclick=function(){setLang('ta')};
+  var saved='en'; try{saved=localStorage.getItem('invite-lang')||'en'}catch(e){}
+  setLang(saved==='ta'?'ta':'en');
+
+  /* copy address */
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var txt=b.getAttribute('data-copy');
+      function done(){
+        b.textContent=lang==='ta'?'நகலெடுக்கப்பட்டது':'Copied';
+        setTimeout(function(){b.innerHTML=tr(b.getAttribute('data-t'),lang==='ta'?1:0)},1600);
+      }
+      function fallback(){
+        var t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';
+        document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);done();
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,fallback)}else{fallback()}
+    });
+  });
+
+  /* reveal on scroll */
+  var rv=document.querySelectorAll('[data-r]');
+  if('IntersectionObserver' in window&&!reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){io.observe(el)});
+  }else{rv.forEach(function(el){el.classList.add('in')})}
+
+  /* scroll: progress, parallax variable, active nav */
+  var prog=document.getElementById('prog'),ticking=false;
+  function onScroll(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(function(){
+      var y=window.scrollY||0,max=Math.max(1,doc.scrollHeight-window.innerHeight);
+      doc.style.setProperty('--sy',y);
+      prog.style.transform='scaleX('+Math.min(1,y/max)+')';
+      ticking=false;
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  var links=document.querySelectorAll('.bar nav a');
+  if('IntersectionObserver' in window){
+    var so=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}
+      });
+    },{rootMargin:'-45% 0px -45% 0px'});
+    ['wedding','reception','venue'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
+  }
+
+  /* countdown to the ceremony: 10 Dec 2026, 7:30 AM IST */
+  var target=new Date('2026-12-10T07:30:00+05:30').getTime();
+  var el={d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
+  function p(n){return n<10?'0'+n:''+n}
+  function tick(){
+    var t=Math.max(0,target-Date.now()),
+        d=Math.floor(t/864e5),h=Math.floor(t%864e5/36e5),m=Math.floor(t%36e5/6e4),s=Math.floor(t%6e4/1e3);
+    el.d.textContent=d;el.h.textContent=p(h);el.m.textContent=p(m);el.s.textContent=p(s);
+  }
+  tick();setInterval(tick,1000);
+
+  /* falling petals, opening screen only */
+  var cv=document.getElementById('petals');
+  if(cv&&cv.getContext&&!reduce){
+    var cx=cv.getContext('2d'),W=0,H=0,dpr=Math.min(2,window.devicePixelRatio||1),ps=[],run=false,raf=0;
+    function size(){var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+    function mk(init){return{x:Math.random()*W,y:init?Math.random()*H:-20,r:5+Math.random()*7,vy:.35+Math.random()*.55,vx:(Math.random()-.5)*.3,
+      a:Math.random()*6.28,va:(Math.random()-.5)*.02,ph:Math.random()*6.28,o:.2+Math.random()*.3}}
+    function color(){return getComputedStyle(doc).getPropertyValue('--accent').trim()||'#7a1f26'}
+    function frame(){
+      if(!run)return;
+      cx.clearRect(0,0,W,H);var c=color();
+      ps.forEach(function(q,i){
+        q.y+=q.vy;q.ph+=.015;q.x+=q.vx+Math.sin(q.ph)*.35;q.a+=q.va;
+        if(q.y>H+20)ps[i]=mk(false);
+        cx.save();cx.translate(q.x,q.y);cx.rotate(q.a);cx.globalAlpha=q.o;cx.fillStyle=c;
+        cx.beginPath();cx.ellipse(0,0,q.r,q.r*.45,0,0,6.283);cx.fill();cx.restore();
+      });
+      raf=requestAnimationFrame(frame);
+    }
+    size();for(var i=0;i<22;i++)ps.push(mk(true));
+    window.addEventListener('resize',size);
+    new IntersectionObserver(function(es){
+      var vis=es[0].isIntersecting;
+      if(vis&&!run){run=true;raf=requestAnimationFrame(frame)}else if(!vis){run=false;cancelAnimationFrame(raf)}
+    }).observe(cv);
+  }
+})();
+</script>
