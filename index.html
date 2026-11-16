@@ -26,12 +26,12 @@ body{margin:0;font-size:16px;background:var(--bg);color:var(--fg);font-family:va
   padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px));
   background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .bar nav{display:flex;gap:18px}
-.bar nav a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.bar nav a{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
 .bar nav a.on{color:var(--accent);border-color:var(--accent)}
 .bar nav a:focus-visible,.lang button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .progress{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--accent);transform-origin:left;transform:scaleX(0)}
 .lang{display:flex;border:1px solid var(--rule);flex:none}
-.lang button{font:inherit;font-size:12px;letter-spacing:.06em;padding:6px 12px;border:0;background:none;color:var(--muted);cursor:pointer}
+.lang button{font:inherit;font-size:14px;letter-spacing:.04em;padding:8px 14px;border:0;background:none;color:var(--muted);cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
 
 /* chapters */
@@ -53,7 +53,9 @@ h1,h2,h3{margin:0;font-weight:300}
 .names h1{font-family:var(--display);font-style:italic;font-size:clamp(50px,15vw,96px);line-height:1.08;letter-spacing:-.015em}
 .ta .names h1{font-style:normal;font-weight:400;font-size:clamp(40px,12vw,76px)}
 .amp{font-family:var(--display);font-style:italic;color:var(--accent);font-size:clamp(26px,7vw,40px);line-height:1}
-.dateline{font-size:14px;letter-spacing:.34em;color:var(--muted);font-variant-numeric:tabular-nums}
+.dateline{font-size:clamp(20px,5.6vw,28px);letter-spacing:.3em;color:var(--fg);font-weight:400;font-variant-numeric:tabular-nums}
+#top .eyebrow{font-size:clamp(14px,3.8vw,18px);letter-spacing:.34em;font-weight:500}
+.ta #top .eyebrow{font-size:clamp(18px,4.8vw,24px);letter-spacing:.04em}
 .cue{position:absolute;bottom:28px;left:50%;translate:-50% 0;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 .cue i{display:block;width:1px;height:38px;background:linear-gradient(var(--accent),transparent);animation:cue 2.2s ease-in-out infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
@@ -118,6 +120,18 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   .split .txt{min-height:88svh;justify-content:center;margin:0;max-width:none;padding:72px 6vw 72px 5vw}
   .split .mandala{right:-12%}
 }
+/* couple portraits */
+.in-w.wide{max-width:720px}
+.pair2{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+.cp{margin:0;display:flex;flex-direction:column;gap:14px;min-width:0}
+.cp .ph{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--panel)}
+.cp .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 30%);display:block;transform:scale(var(--zoom,1));transform-origin:var(--pos,50% 30%)}
+.cp figcaption{display:flex;flex-direction:column;align-items:center;gap:4px}
+.cp .role{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+.ta .cp .role{letter-spacing:.03em;text-transform:none;font-size:14px}
+.cp h3{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(22px,6vw,32px);line-height:1.2}
+.ta .cp h3{font-family:var(--body);font-style:normal;font-weight:400}
+@media (min-width:600px){.pair2{gap:24px}}
 .in-w hr,.txt hr{width:48px;height:0;border:0;border-top:1px solid var(--accent);margin:0;flex:none}
 .chip{font-size:13px;letter-spacing:.12em;color:var(--accent);border:1px solid var(--accent);padding:8px 16px;font-variant-numeric:tabular-nums}
 .ta .chip{letter-spacing:.02em;font-size:14px}
@@ -172,7 +186,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   .js [data-r]{opacity:1;transform:none;transition:none}
   .mandala{rotate:none}.cue i{animation:none}
 }
-@media (max-width:420px){.bar nav{gap:12px}.bar nav a{font-size:10px;letter-spacing:.12em}.lang button{padding:6px 9px}}
+@media (max-width:420px){.bar nav{gap:14px}.bar nav a{font-size:12px;letter-spacing:.1em}.lang button{font-size:13px;padding:7px 11px}}
 </style>
 </head>
 <body>
@@ -218,6 +232,29 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     </div>
   </section>
 
+  <!-- the couple -->
+  <section class="ch">
+    <div class="in-w wide">
+      <div class="small" data-r data-t="The couple|மணமக்கள்">The couple</div>
+      <div class="pair2">
+        <figure class="cp" data-r>
+          <div class="ph"><img src="images/gowthaman.webp" style="--pos:44% 24%" alt="P. Gowthaman" loading="lazy"></div>
+          <figcaption>
+            <span class="role" data-t="The groom|மணமகன்">The groom</span>
+            <h3 data-t="P. Gowthaman|ப. கௌதமன்">P. Gowthaman</h3>
+          </figcaption>
+        </figure>
+        <figure class="cp" data-r style="--d:.15s">
+          <div class="ph"><img src="images/kaviya.webp" style="--pos:42% 36%;--zoom:1.5" alt="B. Kaviya" loading="lazy"></div>
+          <figcaption>
+            <span class="role" data-t="The bride|மணமகள்">The bride</span>
+            <h3 data-t="B. Kaviya|பா. காவியா">B. Kaviya</h3>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- families, introduced before the events -->
   <section class="ch">
     <div class="in-w">
@@ -231,7 +268,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 
   <!-- 4 wedding -->
   <section class="split rev" id="wedding">
-    <figure class="pic"><img src="images/temple.webp" style="--pos:48% 42%" alt="The gopuram and entrance of Sri Thanthonreeswarar Temple, Penur"><figcaption data-t="Sri Thanthonreeswarar Temple|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்">Sri Thanthonreeswarar Temple</figcaption></figure>
+    <figure class="pic"><img src="images/temple.webp" style="--pos:48% 42%" alt="The gopuram and entrance of Sri Thanthonreeswarar Temple, Belur"><figcaption data-t="Sri Thanthonreeswarar Temple|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்">Sri Thanthonreeswarar Temple</figcaption></figure>
     <div class="txt">
       <div class="small" data-r data-t="The wedding|திருமணம்">The wedding</div>
       <div class="big" data-r style="--d:.1s">10</div>
@@ -240,8 +277,8 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       <div class="sub" data-r style="--d:.3s" data-t="Muhurtham · Karthigai 24|முகூர்த்தம் · கார்த்திகை 24">Muhurtham · Karthigai 24</div>
       <div class="bigtime" data-r style="--d:.35s" data-t="8:30 AM|காலை 8:30">8:30 AM</div>
       <div class="chip" data-r style="--d:.4s" data-t="Auspicious time 7:30 – 9:00 AM|நல்ல நேரம்: காலை 7:30 – 9:00">Auspicious time 7:30 – 9:00 AM</div>
-      <div class="place" data-r style="--d:.45s" data-t="Sri Thanthonreeswarar Temple<br>Penur, Salem District<br>Tamil Nadu|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேனூர், சேலம் மாவட்டம்<br>தமிழ்நாடு">Sri Thanthonreeswarar Temple<br>Penur, Salem District<br>Tamil Nadu</div>
-      <a class="btn" data-r style="--d:.5s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Penur+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
+      <div class="place" data-r style="--d:.45s" data-t="Sri Thanthonreeswarar Temple<br>Belur, Salem District<br>Tamil Nadu|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேளூர், சேலம் மாவட்டம்<br>தமிழ்நாடு">Sri Thanthonreeswarar Temple<br>Belur, Salem District<br>Tamil Nadu</div>
+      <a class="btn" data-r style="--d:.5s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Belur+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
     </div>
   </section>
 
