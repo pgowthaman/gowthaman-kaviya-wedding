@@ -1,5 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Gowthaman and Kaviya</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Wedding invitation of P. Gowthaman and B. Kaviya, 10 December 2026, Salem.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Tamil:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap">
 <style>
 /* Layout: full-screen chapters on one centered column. Hero with turning mandala and petals, couple,
@@ -13,7 +18,7 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171112;--fg:#f1e7e5;--muted:#a69493;--accent:#e0868c;--rule:#33282a;--panel:#211819;--night:#2b0d12;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#171112;--fg:#f1e7e5;--muted:#a69493;--accent:#e0868c;--rule:#33282a;--panel:#211819;--night:#2b0d12;color-scheme:dark}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:300;overflow-x:clip}
+body{margin:0;font-size:16px;background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:300;overflow-x:clip}
 *{box-sizing:border-box}
 
 /* top bar */
@@ -33,7 +38,9 @@ body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:30
 .ch{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:28px;
   padding-block:104px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow:hidden}
 .in-w{position:relative;z-index:1;max-width:540px;width:100%;display:flex;flex-direction:column;align-items:center;gap:28px;min-width:0}
-.pin{position:sticky;top:0;z-index:1}
+.pin{position:sticky;top:0;z-index:1;min-height:72svh}
+.ch{min-height:0;padding-block:72px}
+#top{min-height:100svh}
 .over{z-index:2}
 .night{background:var(--night);color:var(--night-fg);--muted:var(--night-muted);--accent:var(--night-accent);--rule:#4a2a2e}
 
@@ -55,7 +62,6 @@ h1,h2,h3{margin:0;font-weight:300}
 /* decorative */
 .mandala{position:absolute;left:50%;top:50%;width:min(110vw,720px);aspect-ratio:1;color:var(--accent);opacity:.14;pointer-events:none;
   translate:-50% -50%;rotate:calc(var(--sy) * .04deg)}
-.night .mandala{opacity:.12;rotate:calc(var(--sy) * -.03deg)}
 canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
 .msg{font-family:var(--display);font-size:clamp(24px,6.4vw,34px);line-height:1.5;font-weight:300}
@@ -80,6 +86,43 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 .ta .bigtime{font-family:var(--body);font-weight:300;font-size:clamp(36px,10vw,58px)}
 .day{font-size:20px;font-weight:400;letter-spacing:.04em;line-height:1.6}
 .sub{font-size:15px;color:var(--muted);line-height:1.7}
+.photo{position:relative;width:100%;aspect-ratio:4/3;margin:10px 0 0;overflow:hidden;background:var(--panel)}
+.photo img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;display:block;will-change:transform}
+/* split chapter: photo pinned on one side while the details scroll beside it */
+.split{position:relative;display:grid;grid-template-columns:1fr;min-height:0;overflow:clip;text-align:left}
+.split .mandala{left:auto;right:-30%;top:55%;translate:0 -50%;width:min(110vw,640px)}
+.split .pic{position:relative;margin:0;height:56svh;overflow:hidden;background:var(--panel)}
+.split .pic img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);display:block;will-change:transform;transform-origin:var(--pos,50% 50%)}
+/* a small photo is shown at a sharp size over a blurred copy of itself */
+.split .pic.fit::before{content:"";position:absolute;inset:-30px;background:var(--bgimg) center/cover no-repeat;filter:blur(28px) brightness(.5) saturate(1.2)}
+.split .pic.fit img{left:50%;top:50%;width:auto;height:auto;max-width:min(78%,420px);max-height:86%;object-fit:contain;translate:-50% -50%;box-shadow:0 18px 50px rgba(0,0,0,.45);z-index:1}
+.split{--fade:var(--bg)}
+.split.night{--fade:var(--night)}
+.split .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--fade) 0%,transparent 45%);pointer-events:none}
+.split:not(.night) .pic figcaption{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.split .big{text-align:left;line-height:.9}
+.split .pic figcaption{position:absolute;z-index:1;left:max(16px,env(safe-area-inset-left,0px));bottom:24px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--night-fg)}
+.ta .split .pic figcaption{letter-spacing:.03em;text-transform:none;font-size:14px}
+.split .txt{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:20px;width:100%;max-width:560px;margin:0 auto;box-sizing:border-box;
+  padding:40px max(20px,env(safe-area-inset-right,0px)) 64px max(20px,env(safe-area-inset-left,0px))}
+.split .txt .bigtime{text-align:left}
+.split .txt .place{font-family:var(--display);font-size:26px;line-height:1.35}
+.ta .split .txt .place{font-family:var(--body);font-size:22px}
+@media (min-width:860px){
+  .split{grid-template-columns:1fr 1fr}
+  .split .pic{position:sticky;top:0;height:88svh;align-self:start}
+  .split .pic::after{background:linear-gradient(to right,transparent 55%,var(--fade) 100%)}
+  .split.rev .pic{order:2}
+  .split.rev .pic::after{background:linear-gradient(to left,transparent 55%,var(--fade) 100%)}
+  .split.rev .txt{padding:72px 5vw 72px 6vw}
+  .split .txt{min-height:88svh;justify-content:center;margin:0;max-width:none;padding:72px 6vw 72px 5vw}
+  .split .mandala{right:-12%}
+}
+.in-w hr,.txt hr{width:48px;height:0;border:0;border-top:1px solid var(--accent);margin:0;flex:none}
+.chip{font-size:13px;letter-spacing:.12em;color:var(--accent);border:1px solid var(--accent);padding:8px 16px;font-variant-numeric:tabular-nums}
+.ta .chip{letter-spacing:.02em;font-size:14px}
+.placebox{width:100%;background:var(--panel);padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:10px}
+.placebox .btn{margin-top:12px}
 .place{font-size:20px;line-height:1.5}
 
 /* countdown */
@@ -131,25 +174,13 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 }
 @media (max-width:420px){.bar nav{gap:12px}.bar nav a{font-size:10px;letter-spacing:.12em}.lang button{padding:6px 9px}}
 </style>
-
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <path id="pt" d="M0 0C11 -28 11 -62 0 -92C-11 -62 -11 -28 0 0Z"/>
-    <g id="mandala" fill="none" stroke="currentColor" stroke-width=".5">
-      <circle r="96"/><circle r="99"/><circle r="30"/><circle r="18"/>
-      <use href="#pt"/><use href="#pt" transform="rotate(22.5)"/><use href="#pt" transform="rotate(45)"/><use href="#pt" transform="rotate(67.5)"/>
-      <use href="#pt" transform="rotate(90)"/><use href="#pt" transform="rotate(112.5)"/><use href="#pt" transform="rotate(135)"/><use href="#pt" transform="rotate(157.5)"/>
-      <use href="#pt" transform="rotate(180)"/><use href="#pt" transform="rotate(202.5)"/><use href="#pt" transform="rotate(225)"/><use href="#pt" transform="rotate(247.5)"/>
-      <use href="#pt" transform="rotate(270)"/><use href="#pt" transform="rotate(292.5)"/><use href="#pt" transform="rotate(315)"/><use href="#pt" transform="rotate(337.5)"/>
-    </g>
-  </defs>
-</svg>
+</head>
+<body>
 
 <div class="bar" id="bar">
   <nav aria-label="Sections">
     <a href="#wedding" data-t="Wedding|திருமணம்">Wedding</a>
     <a href="#reception" data-t="Reception|வரவேற்பு">Reception</a>
-    <a href="#venue" data-t="Venue|இடம்">Venue</a>
   </nav>
   <div class="lang" role="group" aria-label="Language">
     <button type="button" id="b-en" aria-pressed="true">English</button>
@@ -162,10 +193,9 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 
   <!-- 1 opening -->
   <section class="ch" id="top">
-    <svg class="mandala" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#mandala"/></svg>
+    <svg class="mandala" viewBox="-100 -100 200 200" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width=".55"><path transform="rotate(0)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(45)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(90)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(135)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(180)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(225)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(270)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(315)" d="M0 0C8 -9.1 8 -18.2 0 -26C-8 -18.2 -8 -9.1 0 0Z"/><path transform="rotate(22.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(67.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(112.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(157.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(202.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(247.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(292.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(337.5)" d="M0 -12C15 -26 15 -40 0 -52C-15 -40 -15 -26 0 -12Z"/><path transform="rotate(0)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(45)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(90)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(135)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(180)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(225)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(270)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><path transform="rotate(315)" d="M0 -16C18 -32.8 18 -49.599999999999994 0 -64C-18 -49.599999999999994 -18 -32.8 0 -16Z"/><circle r="70"/><circle cx="0" cy="-82" r="8"/><circle cx="21.22" cy="-79.21" r="8"/><circle cx="41" cy="-71.01" r="8"/><circle cx="57.98" cy="-57.98" r="8"/><circle cx="71.01" cy="-41" r="8"/><circle cx="79.21" cy="-21.22" r="8"/><circle cx="82" cy="0" r="8"/><circle cx="79.21" cy="21.22" r="8"/><circle cx="71.01" cy="41" r="8"/><circle cx="57.98" cy="57.98" r="8"/><circle cx="41" cy="71.01" r="8"/><circle cx="21.22" cy="79.21" r="8"/><circle cx="0" cy="82" r="8"/><circle cx="-21.22" cy="79.21" r="8"/><circle cx="-41" cy="71.01" r="8"/><circle cx="-57.98" cy="57.98" r="8"/><circle cx="-71.01" cy="41" r="8"/><circle cx="-79.21" cy="21.22" r="8"/><circle cx="-82" cy="0" r="8"/><circle cx="-79.21" cy="-21.22" r="8"/><circle cx="-71.01" cy="-41" r="8"/><circle cx="-57.98" cy="-57.98" r="8"/><circle cx="-41" cy="-71.01" r="8"/><circle cx="-21.22" cy="-79.21" r="8"/><circle r="97"/></g><g fill="currentColor"><circle r="1.6"/><circle cx="0" cy="-30" r="1.1"/><circle cx="21.21" cy="-21.21" r="1.1"/><circle cx="30" cy="0" r="1.1"/><circle cx="21.21" cy="21.21" r="1.1"/><circle cx="0" cy="30" r="1.1"/><circle cx="-21.21" cy="21.21" r="1.1"/><circle cx="-30" cy="0" r="1.1"/><circle cx="-21.21" cy="-21.21" r="1.1"/><circle cx="0" cy="-70" r="1.1"/><circle cx="26.79" cy="-64.67" r="1.1"/><circle cx="49.5" cy="-49.5" r="1.1"/><circle cx="64.67" cy="-26.79" r="1.1"/><circle cx="70" cy="0" r="1.1"/><circle cx="64.67" cy="26.79" r="1.1"/><circle cx="49.5" cy="49.5" r="1.1"/><circle cx="26.79" cy="64.67" r="1.1"/><circle cx="0" cy="70" r="1.1"/><circle cx="-26.79" cy="64.67" r="1.1"/><circle cx="-49.5" cy="49.5" r="1.1"/><circle cx="-64.67" cy="26.79" r="1.1"/><circle cx="-70" cy="0" r="1.1"/><circle cx="-64.67" cy="-26.79" r="1.1"/><circle cx="-49.5" cy="-49.5" r="1.1"/><circle cx="-26.79" cy="-64.67" r="1.1"/><circle cx="0" cy="-82" r="1.1"/><circle cx="21.22" cy="-79.21" r="1.1"/><circle cx="41" cy="-71.01" r="1.1"/><circle cx="57.98" cy="-57.98" r="1.1"/><circle cx="71.01" cy="-41" r="1.1"/><circle cx="79.21" cy="-21.22" r="1.1"/><circle cx="82" cy="0" r="1.1"/><circle cx="79.21" cy="21.22" r="1.1"/><circle cx="71.01" cy="41" r="1.1"/><circle cx="57.98" cy="57.98" r="1.1"/><circle cx="41" cy="71.01" r="1.1"/><circle cx="21.22" cy="79.21" r="1.1"/><circle cx="0" cy="82" r="1.1"/><circle cx="-21.22" cy="79.21" r="1.1"/><circle cx="-41" cy="71.01" r="1.1"/><circle cx="-57.98" cy="57.98" r="1.1"/><circle cx="-71.01" cy="41" r="1.1"/><circle cx="-79.21" cy="21.22" r="1.1"/><circle cx="-82" cy="0" r="1.1"/><circle cx="-79.21" cy="-21.22" r="1.1"/><circle cx="-71.01" cy="-41" r="1.1"/><circle cx="-57.98" cy="-57.98" r="1.1"/><circle cx="-41" cy="-71.01" r="1.1"/><circle cx="-21.22" cy="-79.21" r="1.1"/></g></svg>
     <canvas class="petals" id="petals" aria-hidden="true"></canvas>
     <div class="in-w">
-      <div class="mark" data-r>உ</div>
       <div class="eyebrow" data-r style="--d:.1s" data-t="Wedding Invitation|திருமண அழைப்பிதழ்">Wedding Invitation</div>
       <div class="names" data-r style="--d:.25s">
         <h1 data-t="P. Gowthaman|ப. கௌதமன்">P. Gowthaman</h1>
@@ -174,7 +204,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       </div>
       <div class="dateline" data-r style="--d:.45s">10 · 12 · 2026</div>
     </div>
-    <div class="cue"><span data-t="Scroll|கீழே செல்லவும்">Scroll</span><i></i></div>
+    <div class="cue" aria-hidden="true"><i></i></div>
   </section>
 
   <!-- 2 message -->
@@ -188,39 +218,63 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     </div>
   </section>
 
-  <!-- 3 couple -->
+  <!-- families, introduced before the events -->
   <section class="ch">
     <div class="in-w">
-      <div class="small" data-r data-t="The couple|மணமக்கள்">The couple</div>
-      <div class="pair">
-        <div class="person" data-r>
-          <div class="mono" data-t="G|கௌ">G</div>
-          <h3 data-t="P. Gowthaman|ப. கௌதமன்">P. Gowthaman</h3>
-          <div class="quals">B.E. (Mech.)</div>
-        </div>
-        <div class="person" data-r style="--d:.15s">
-          <div class="mono" data-t="K|கா">K</div>
-          <h3 data-t="B. Kaviya|பா. காவியா">B. Kaviya</h3>
-          <div class="quals">B.Sc. (Cardiac Tech.)</div>
-        </div>
+      <div class="small" data-r data-t="With the blessings of|ஆசியுடன்">With the blessings of</div>
+      <div class="fam" data-r style="--d:.1s">
+        <div><small data-t="Groom's family|மணமகன் இல்லத்தார்">Groom's family</small><span data-t="Palanisamy<br>Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem|பழனிசாமி<br>கோடீஸ்வரி<br>கந்தப்பா காலனி, அன்னதானப்பட்டி, சேலம்">Palanisamy<br>Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem</span></div>
+        <div><small data-t="Bride's family|மணமகள் இல்லத்தார்">Bride's family</small><span data-t="Bharathidasan<br>Anitha<br>Vellalapatti, Salem|பாரதிதாசன்<br>அனிதா<br>வெள்ளாளப்பட்டி, சேலம்">Bharathidasan<br>Anitha<br>Vellalapatti, Salem</span></div>
       </div>
     </div>
   </section>
 
   <!-- 4 wedding -->
-  <section class="ch" id="wedding">
-    <div class="in-w">
+  <section class="split rev" id="wedding">
+    <figure class="pic"><img src="images/temple.webp" style="--pos:48% 42%" alt="The gopuram and entrance of Sri Thanthonreeswarar Temple, Penur"><figcaption data-t="Sri Thanthonreeswarar Temple|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்">Sri Thanthonreeswarar Temple</figcaption></figure>
+    <div class="txt">
       <div class="small" data-r data-t="The wedding|திருமணம்">The wedding</div>
       <div class="big" data-r style="--d:.1s">10</div>
       <div class="day" data-r style="--d:.2s" data-t="Thursday · December 2026|வியாழக்கிழமை · டிசம்பர் 2026">Thursday · December 2026</div>
-      <div class="bigtime" data-r style="--d:.25s" data-t="7:30 – 9:00 AM|காலை 7:30 – 9:00">7:30 – 9:00 AM</div>
-      <div class="sub" data-r data-t="Muhurtham, Karthigai 24|முகூர்த்தம், கார்த்திகை 24">Muhurtham, Karthigai 24</div>
-      <div class="place" data-r data-t="Sri Thanthonreeswarar Temple<br>Penur, Salem District|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேனூர், சேலம் மாவட்டம்">Sri Thanthonreeswarar Temple<br>Penur, Salem District</div>
+      <hr data-r style="--d:.25s">
+      <div class="sub" data-r style="--d:.3s" data-t="Muhurtham · Karthigai 24|முகூர்த்தம் · கார்த்திகை 24">Muhurtham · Karthigai 24</div>
+      <div class="bigtime" data-r style="--d:.35s" data-t="8:30 AM|காலை 8:30">8:30 AM</div>
+      <div class="chip" data-r style="--d:.4s" data-t="Auspicious time 7:30 – 9:00 AM|நல்ல நேரம்: காலை 7:30 – 9:00">Auspicious time 7:30 – 9:00 AM</div>
+      <div class="place" data-r style="--d:.45s" data-t="Sri Thanthonreeswarar Temple<br>Penur, Salem District<br>Tamil Nadu|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<br>பேனூர், சேலம் மாவட்டம்<br>தமிழ்நாடு">Sri Thanthonreeswarar Temple<br>Penur, Salem District<br>Tamil Nadu</div>
+      <a class="btn" data-r style="--d:.5s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Penur+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
     </div>
   </section>
 
-  <!-- 5 countdown, stays pinned while the reception slides over it -->
-  <section class="ch pin" aria-label="Countdown to the wedding ceremony">
+  <!-- 6 reception, evening palette -->
+  <section class="split over night" id="reception">
+    <figure class="pic"><img src="images/mahal-gate.jpg" style="--pos:36% 62%" alt="Sri Vaitheeswara Mahal with its entrance gate decorated with palm leaves and flowers"><figcaption data-t="Sri Vaitheeswara Mahal|ஸ்ரீ வைத்தீஸ்வரா மஹால்">Sri Vaitheeswara Mahal</figcaption></figure>
+    <div class="txt">
+      <div class="small" data-r data-t="The reception|வரவேற்பு">The reception</div>
+      <div class="bigtime" data-r style="--d:.1s" data-t="6:00 – 9:00 PM|மாலை 6:00 – 9:00">6:00 – 9:00 PM</div>
+      <div class="day" data-r style="--d:.15s" data-t="Thursday, 10 December 2026|வியாழக்கிழமை, 10 டிசம்பர் 2026">Thursday, 10 December 2026</div>
+      <hr data-r style="--d:.2s">
+      <div class="sub" data-r style="--d:.25s" data-t="You have always been a part of our lives. Join us that evening and bless us at our wedding reception.|தாங்கள் எப்போதும் எங்கள் வாழ்வின் ஓர் அங்கம். அன்று மாலை நடைபெறும் எங்கள் திருமண வரவேற்பில் கலந்துகொண்டு வாழ்த்த அன்புடன் அழைக்கிறோம்.">You have always been a part of our lives. Join us that evening and bless us at our wedding reception.</div>
+      <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், ஹரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</div>
+      <a class="btn" data-r style="--d:.35s" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Vaitheeswara+Mahal+Valasaiyur+Harur+Main+Road+Salem" target="_blank" rel="noopener" data-t="Get directions|வழி காண">Get directions</a>
+    </div>
+  </section>
+
+  <!-- 8 contact -->
+  <section class="ch over" style="background:var(--bg)">
+    <div class="in-w">
+      <div class="small" data-r data-t="Contact us|தொடர்புக்கு">Contact us</div>
+      <p class="msg" data-r style="--d:.1s" data-t="Need any help or directions? Reach out to us.|உதவி அல்லது வழி தேவையா? எங்களைத் தொடர்புகொள்ளுங்கள்.">Need any help or directions? Reach out to us.</p>
+      <div class="contacts" data-r style="--d:.2s">
+        <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b></div>
+        <div><span data-t="Bride's family|மணமகள் இல்லம்">Bride's family</span><b><a href="tel:+919944395734">99443 95734</a></b></div>
+      </div>
+      <div class="thanks" data-r style="--d:.3s" data-t="See you there|சந்திப்போம்">See you there</div>
+      <p class="foot" data-r style="--d:.4s" data-t="With best compliments from<br><em>Friends and Relatives</em>|நண்பர்கள் மற்றும் உறவினர்களின் வாழ்த்துகளுடன்<br><em>இரு வீட்டார் அழைப்பு</em>">With best compliments from<br><em>Friends and Relatives</em></p>
+    </div>
+  </section>
+
+  <!-- countdown to the wedding, closes the page -->
+  <section class="ch over" aria-label="Countdown to the wedding ceremony" style="background:var(--bg)">
     <div class="in-w">
       <div class="small" data-r data-t="Until we say I do|திருமணத்திற்கு இன்னும்">Until we say I do</div>
       <div class="count" data-r style="--d:.1s">
@@ -229,70 +283,6 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
         <div><b id="m">--</b><span data-t="Mins|நிமிடம்">Mins</span></div>
         <div><b id="s">--</b><span data-t="Secs|விநாடி">Secs</span></div>
       </div>
-    </div>
-  </section>
-
-  <!-- 6 reception, evening palette -->
-  <section class="ch over night" id="reception">
-    <svg class="mandala" viewBox="-100 -100 200 200" aria-hidden="true"><use href="#mandala"/></svg>
-    <div class="in-w">
-      <div class="small" data-r data-t="The reception|வரவேற்பு">The reception</div>
-      <div class="day" data-r data-t="Thursday, 10 December 2026|வியாழக்கிழமை, 10 டிசம்பர் 2026">Thursday, 10 December 2026</div>
-      <div class="bigtime" data-r style="--d:.1s" data-t="6:00 – 9:00 PM|மாலை 6:00 – 9:00">6:00 – 9:00 PM</div>
-      <div class="sub" data-r style="--d:.2s" data-t="Join us that evening and bless us at our wedding reception.|அன்று மாலை நடைபெறும் எங்கள் திருமண வரவேற்பில் கலந்துகொண்டு வாழ்த்த அன்புடன் அழைக்கிறோம்.">Join us that evening and bless us at our wedding reception.</div>
-      <div class="place" data-r style="--d:.3s" data-t="Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road, Salem|ஸ்ரீ வைத்தீஸ்வரா மஹால்<br>வலசையூர், ஹரூர் மெயின் ரோடு, சேலம்">Sri Vaitheeswara Mahal<br>Valasaiyur, Harur Main Road, Salem</div>
-    </div>
-  </section>
-
-  <!-- 7 venues -->
-  <section class="ch over" id="venue" style="background:var(--bg)">
-    <div class="in-w">
-      <div class="small" data-r data-t="Find us|இடங்கள்">Find us</div>
-      <div class="venues">
-        <div class="vcard" data-r>
-          <h3 data-t="Wedding · 7:30 AM|திருமணம் · காலை 7:30">Wedding · 7:30 AM</h3>
-          <p data-t="Sri Thanthonreeswarar Temple<small>Penur, Salem District, Tamil Nadu</small>|ஸ்ரீ தான்தோன்றீஸ்வரர் திருக்கோயில்<small>பேனூர், சேலம் மாவட்டம், தமிழ்நாடு</small>">Sri Thanthonreeswarar Temple<small>Penur, Salem District, Tamil Nadu</small></p>
-          <div class="row">
-            <a class="btn solid" data-t="Open map|வரைபடம்" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Thanthonreeswarar+Temple+Penur+Salem" target="_blank" rel="noopener">Open map</a>
-            <button class="btn" type="button" data-copy="Sri Thanthonreeswarar Temple, Penur, Salem District, Tamil Nadu" data-t="Copy address|முகவரி நகலெடு">Copy address</button>
-          </div>
-        </div>
-        <div class="vcard" data-r style="--d:.12s">
-          <h3 data-t="Reception · 6:00 PM|வரவேற்பு · மாலை 6:00">Reception · 6:00 PM</h3>
-          <p data-t="Sri Vaitheeswara Mahal<small>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</small>|ஸ்ரீ வைத்தீஸ்வரா மஹால்<small>வலசையூர், ஹரூர் மெயின் ரோடு<br>சேலம் மாவட்டம், தமிழ்நாடு</small>">Sri Vaitheeswara Mahal<small>Valasaiyur, Harur Main Road<br>Salem District, Tamil Nadu</small></p>
-          <div class="row">
-            <a class="btn solid" data-t="Open map|வரைபடம்" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Vaitheeswara+Mahal+Valasaiyur+Harur+Main+Road+Salem" target="_blank" rel="noopener">Open map</a>
-            <button class="btn" type="button" data-copy="Sri Vaitheeswara Mahal, Valasaiyur, Harur Main Road, Salem District, Tamil Nadu" data-t="Copy address|முகவரி நகலெடு">Copy address</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8 rsvp -->
-  <section class="ch over" style="background:var(--bg)">
-    <div class="in-w">
-      <div class="small" data-r data-t="Will you join us?|வருகையை உறுதிசெய்க">Will you join us?</div>
-      <p class="msg" data-r style="--d:.1s" data-t="Let us know you are coming.|தாங்கள் வருகை தருவதை எங்களுக்குத் தெரிவியுங்கள்.">Let us know you are coming.</p>
-      <div class="row" data-r style="--d:.2s">
-        <a class="btn solid" id="rsvp" target="_blank" rel="noopener" href="https://wa.me/919865068055" data-t="Confirm on WhatsApp|WhatsApp-இல் உறுதிசெய்க">Confirm on WhatsApp</a>
-      </div>
-      <div class="contacts" data-r style="--d:.3s">
-        <div><span data-t="Groom's family|மணமகன் இல்லம்">Groom's family</span><b><a href="tel:+919865068055">98650 68055</a></b></div>
-        <div><span data-t="Bride's family|மணமகள் இல்லம்">Bride's family</span><b><a href="tel:+919944395734">99443 95734</a></b></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9 families and closing -->
-  <section class="ch over" style="background:var(--bg)">
-    <div class="in-w">
-      <div class="fam" data-r>
-        <div><small data-t="Groom's family|மணமகன் இல்லத்தார்">Groom's family</small><span data-t="P. Palanisamy &amp; P. Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem|ப. பழனிசாமி – கோடீஸ்வரி<br>கந்தப்பா காலனி, அன்னதானப்பட்டி, சேலம்">P. Palanisamy &amp; P. Kodeeswari<br>Kandhappa Colony, Annadhanapatti, Salem</span></div>
-        <div><small data-t="Bride's family|மணமகள் இல்லத்தார்">Bride's family</small><span data-t="B. Bharathidasan &amp; B. Anitha<br>Vellalapatti, Salem|பா. பாரதிதாசன் – அனிதா<br>வெள்ளாளப்பட்டி, சேலம்">B. Bharathidasan &amp; B. Anitha<br>Vellalapatti, Salem</span></div>
-      </div>
-      <div class="thanks" data-r style="--d:.1s" data-t="See you there|சந்திப்போம்">See you there</div>
-      <p class="foot" data-r style="--d:.2s" data-t="With best compliments from<br><em>Friends and Relatives</em>|நண்பர்கள் மற்றும் உறவினர்களின் வாழ்த்துகளுடன்<br><em>இரு வீட்டார் அழைப்பு</em>">With best compliments from<br><em>Friends and Relatives</em></p>
     </div>
   </section>
 </main>
@@ -306,11 +296,7 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   /* language */
   var nodes=document.querySelectorAll('[data-t]'),
       bEn=document.getElementById('b-en'), bTa=document.getElementById('b-ta'),
-      rsvp=document.getElementById('rsvp'), lang='en';
-  var wa={
-    en:'Hello! We are happy to confirm our presence at Gowthaman & Kaviya’s wedding on 10 December 2026.',
-    ta:'வணக்கம்! 10 டிசம்பர் 2026 அன்று நடைபெறும் கௌதமன் & காவியா திருமணத்தில் கலந்துகொள்கிறோம்.'
-  };
+      lang='en';
   function tr(s,i){return s.split('|')[i]}
   function setLang(l){
     lang=l; var i=l==='ta'?1:0;
@@ -319,7 +305,6 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     document.getElementById('bar').classList.toggle('ta',i===1);
     doc.lang=i?'ta':'en';
     bEn.setAttribute('aria-pressed',String(!i)); bTa.setAttribute('aria-pressed',String(!!i));
-    rsvp.href='https://wa.me/919865068055?text='+encodeURIComponent(wa[l]);
     try{localStorage.setItem('invite-lang',l)}catch(e){}
   }
   bEn.onclick=function(){setLang('en')}; bTa.onclick=function(){setLang('ta')};
@@ -351,6 +336,17 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     rv.forEach(function(el){io.observe(el)});
   }else{rv.forEach(function(el){el.classList.add('in')})}
 
+  /* venue photos: parallax on scroll; a missing image hides its frame */
+  var pics=document.querySelectorAll('.pic');
+  pics.forEach(function(f){f.firstElementChild.addEventListener('error',function(){f.style.display='none'})});
+  var photos=document.querySelectorAll('.photo');
+  photos.forEach(function(f){
+    var im=f.firstElementChild;
+    function gone(){f.style.display='none'}
+    im.addEventListener('error',gone);
+    if(im.complete&&im.naturalWidth===0&&im.currentSrc!==''&&!im.hasAttribute('loading'))gone();
+  });
+
   /* scroll: progress, parallax variable, active nav */
   var prog=document.getElementById('prog'),ticking=false;
   function onScroll(){
@@ -359,6 +355,27 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
       var y=window.scrollY||0,max=Math.max(1,doc.scrollHeight-window.innerHeight);
       doc.style.setProperty('--sy',y);
       prog.style.transform='scaleX('+Math.min(1,y/max)+')';
+      if(!reduce){
+        var vh=window.innerHeight;
+        for(var q=0;q<photos.length;q++){
+          var f=photos[q],r=f.getBoundingClientRect();
+          if(r.bottom<-50||r.top>vh+50)continue;
+          var pr=Math.max(-1,Math.min(1,(r.top+r.height/2-vh/2)/vh));
+          f.firstElementChild.style.transform='translateY('+(-pr*r.height*.1).toFixed(1)+'px)';
+        }
+      }
+      if(!reduce){
+        for(var z=0;z<pics.length;z++){
+          var sp=pics[z].parentNode.getBoundingClientRect(),vv=window.innerHeight;
+          if(sp.bottom<0||sp.top>vv)continue;
+          var pp=Math.max(0,Math.min(1,(vv-sp.top)/(sp.height+vv)));
+          pics[z].firstElementChild.style.transform=pics[z].classList.contains('fit')
+            ?'translateY('+((.5-pp)*-24).toFixed(1)+'px)'
+            :'scale('+(1.05+.12*pp).toFixed(3)+') translateY('+((.5-pp)*-5).toFixed(2)+'%)';
+        }
+      }
+      var w=document.getElementById('wedding');
+      if(w&&y<w.offsetTop-window.innerHeight*.45){document.querySelectorAll('.bar nav a').forEach(function(a){a.classList.remove('on')})}
       ticking=false;
     });
   }
@@ -374,8 +391,8 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
     ['wedding','reception','venue'].forEach(function(id){var s=document.getElementById(id);if(s)so.observe(s)});
   }
 
-  /* countdown to the ceremony: 10 Dec 2026, 7:30 AM IST */
-  var target=new Date('2026-12-10T07:30:00+05:30').getTime();
+  /* countdown to the ceremony: 10 Dec 2026, 8:30 AM IST */
+  var target=new Date('2026-12-10T08:30:00+05:30').getTime();
   var el={d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
   function p(n){return n<10?'0'+n:''+n}
   function tick(){
@@ -413,3 +430,5 @@ canvas.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
   }
 })();
 </script>
+</body>
+</html>
